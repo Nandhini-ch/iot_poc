@@ -1,0 +1,103 @@
+<definitions name="TemperatureService"
+  targetNamespace="http://example.com/webservice"
+  xmlns="http://schemas.xmlsoap.org/wsdl/"
+  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+  xmlns:tns="http://example.com/webservice"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <message name="CreateTemperatureRequest">
+    <part name="City" type="xsd:string"/>
+    <part name="Temperature" type="xsd:int"/>
+  </message>
+  <message name="CreateTemperatureResponse">
+    <part name="Status" type="xsd:string"/>
+  </message>
+
+  <message name="UpdateTemperatureRequest">
+    <part name="City" type="xsd:string"/>
+    <part name="Temperature" type="xsd:int"/>
+  </message>
+  <message name="UpdateTemperatureResponse">
+    <part name="Status" type="xsd:string"/>
+  </message>
+
+  <message name="GetTemperatureByIdRequest">
+    <part name="City" type="xsd:string"/>
+  </message>
+  <message name="GetTemperatureByIdResponse">
+    <part name="Temperature" type="xsd:int"/>
+  </message>
+
+  <message name="DeleteTemperatureRequest">
+    <part name="City" type="xsd:string"/>
+  </message>
+  <message name="DeleteTemperatureResponse">
+    <part name="Status" type="xsd:string"/>
+  </message>
+
+  <portType name="TemperaturePortType">
+    <operation name="CreateTemperature">
+      <input message="tns:CreateTemperatureRequest"/>
+      <output message="tns:CreateTemperatureResponse"/>
+    </operation>
+    <operation name="UpdateTemperature">
+      <input message="tns:UpdateTemperatureRequest"/>
+      <output message="tns:UpdateTemperatureResponse"/>
+    </operation>
+    <operation name="GetTemperatureById">
+      <input message="tns:GetTemperatureByIdRequest"/>
+      <output message="tns:GetTemperatureByIdResponse"/>
+    </operation>
+    <operation name="DeleteTemperature">
+      <input message="tns:DeleteTemperatureRequest"/>
+      <output message="tns:DeleteTemperatureResponse"/>
+    </operation>
+  </portType>
+
+  <binding name="TemperatureBinding" type="tns:TemperaturePortType">
+    <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="CreateTemperature">
+      <soap:operation soapAction="http://example.com/webservice/CreateTemperature"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="UpdateTemperature">
+      <soap:operation soapAction="http://example.com/webservice/UpdateTemperature"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="GetTemperatureById">
+      <soap:operation soapAction="http://example.com/webservice/GetTemperatureById"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="DeleteTemperature">
+      <soap:operation soapAction="http://example.com/webservice/DeleteTemperature"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+
+  <service name="TemperatureService">
+    <documentation>SOAP service for temperature information</documentation>
+    <port name="TemperaturePort" binding="tns:TemperatureBinding">
+      <soap:address location="http://localhost:8000/wsdl"/>
+    </port>
+  </service>
+</definitions>

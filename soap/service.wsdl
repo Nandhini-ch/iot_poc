@@ -1,0 +1,41 @@
+<definitions name="TemperatureService"
+  targetNamespace="http://example.com/webservice"
+  xmlns="http://schemas.xmlsoap.org/wsdl/"
+  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+  xmlns:tns="http://example.com/webservice"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <message name="GetTemperatureRequest">
+    <part name="City" type="xsd:string"/>
+  </message>
+  <message name="GetTemperatureResponse">
+    <part name="Temperature" type="xsd:int"/>
+  </message>
+
+  <portType name="TemperaturePortType">
+    <operation name="GetTemperature">
+      <input message="tns:GetTemperatureRequest"/>
+      <output message="tns:GetTemperatureResponse"/>
+    </operation>
+  </portType>
+
+  <binding name="TemperatureBinding" type="tns:TemperaturePortType">
+    <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="GetTemperature">
+      <soap:operation soapAction="http://example.com/webservice/GetTemperature"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+
+  <service name="TemperatureService">
+    <documentation>SOAP service for temperature information</documentation>
+    <port name="TemperaturePort" binding="tns:TemperatureBinding">
+      <soap:address location="http://localhost:8000/wsdl"/>
+    </port>
+  </service>
+</definitions>

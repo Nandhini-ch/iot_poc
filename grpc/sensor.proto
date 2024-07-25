@@ -1,0 +1,21 @@
+// sensor.proto
+syntax = "proto3";
+
+package sensor;
+
+service SensorService {
+    rpc SendData (SensorData) returns (Status) {}
+}
+
+message SensorData {
+    string device_id = 1;
+    string timestamp = 2;
+    float temperature1 = 3;
+    float temperature2 = 4;
+    float humidity1 = 5;
+    float humidity2 = 6;
+}
+
+message Status {
+    string status = 1;
+}
